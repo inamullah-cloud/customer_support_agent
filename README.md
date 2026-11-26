@@ -94,7 +94,7 @@ agent_project/
 **Prerequisites:** Python 3.10+ and a [Groq](https://console.groq.com) API key (or a local [Ollama](https://ollama.com) install).
 
 ```bash
-git clone https://github.com/<your-username>/agent_project.git
+git clone https://github.com/inamullah-cloud/customer_support_agent/agent_project.git
 cd agent_project
 
 python -m venv .venv
