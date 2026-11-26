@@ -1,0 +1,37 @@
+model:
+  provider: groq            # groq | ollama
+  name: openai/gpt-oss-120b # e.g. "mistral" when provider is ollama
+  temperature: 0.0
+  max_retries: 2
+  # The Groq API key is read from the GROQ_API_KEY environment variable (.env).
+
+agent:
+  max_tool_iterations: 5
+  max_retries: 2
+  max_reflections: 2
+
+memory:
+  enabled: true            # recall stored memories into the agent's prompts
+  auto_extract: true       # let the agent save new preferences/facts after a turn
+  max_context_items: 5     # memories injected per turn
+  max_new_per_turn: 3      # memories the agent may save per turn
+
+observability:
+  slow_node_threshold_ms: 1000
+  slow_tool_threshold_ms: 1000
+
+reliability:
+  healthy_max_failure_rate: 5      # percent
+  degraded_max_failure_rate: 20    # percent
+  regression_threshold: 2.0        # failure-rate increase (percentage points)
+
+evaluation:
+  auto_approve: true               # auto-approve gated tools during evaluation runs
+
+api:
+  cors_origins:
+    - http://localhost:3000
+    - http://localhost:5173
+
+logging:
+  level: INFO

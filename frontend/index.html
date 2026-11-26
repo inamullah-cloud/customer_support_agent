@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Relay – agent console</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body>
+  <div class="app" id="app" data-panel="none">
+
+    <header class="topbar">
+      <div class="brand">Relay</div>
+      <nav class="top-actions" aria-label="Conversation">
+        <button type="button" class="btn ghost panel-toggle" id="toggleMemory" aria-controls="panelMemory" aria-expanded="false">Memory</button>
+        <button type="button" class="btn ghost panel-toggle" id="toggleRun" aria-controls="panelRun" aria-expanded="false">Run</button>
+        <button type="button" class="btn" id="newChat">New chat</button>
+      </nav>
+    </header>
+
+    <!-- Memory -->
+    <aside class="panel memory" id="panelMemory" aria-labelledby="memoryTitle">
+      <h2 class="panel-title" id="memoryTitle">Memory</h2>
+      <p class="hint">What the agent remembers about you. It is recalled into every reply and can be edited here.</p>
+
+      <label class="field">
+        <span>Your id</span>
+        <input id="userId" type="text" autocomplete="off" spellcheck="false" maxlength="100">
+      </label>
+
+      <form id="memoryForm" class="memory-form">
+        <label class="field">
+          <span>Type</span>
+          <select id="memoryType">
+            <option value="preference">Preference</option>
+            <option value="fact">Fact</option>
+            <option value="goal">Goal</option>
+            <option value="context">Context</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Memory</span>
+          <input id="memoryContent" type="text" maxlength="2000" placeholder="Prefers SMS updates" required>
+        </label>
+        <button type="submit" class="btn">Add memory</button>
+      </form>
+
+      <ul id="memoryList" class="memory-list" aria-live="polite"></ul>
+    </aside>
+
+    <!-- Chat -->
+    <main class="chat">
+      <div id="log" role="log" aria-live="polite" aria-label="Conversation">
+        <div class="thread" id="thread">
+          <section class="empty" id="empty">
+            <h1>Ask about an order, a price, or the weather.</h1>
+            <p>Actions that change something, like cancelling an order, ask for your approval first.</p>
+            <div class="suggestions" id="suggestions"></div>
+          </section>
+        </div>
+      </div>
+
+      <form class="composer" id="composer">
+        <label class="sr-only" for="input">Message</label>
+        <textarea id="input" rows="1" placeholder="Message the agent" maxlength="4000"></textarea>
+        <button type="submit" class="btn primary" id="send">Send</button>
+      </form>
+    </main>
+
+    <!-- Run -->
+    <aside class="panel run" id="panelRun" aria-label="Agent run">
+      <div class="tabs" role="tablist" aria-label="Run panel">
+        <button type="button" role="tab" id="tabTrail" aria-selected="true" aria-controls="viewTrail">Trail</button>
+        <button type="button" role="tab" id="tabHealth" aria-selected="false" aria-controls="viewHealth" tabindex="-1">Health</button>
+      </div>
+
+      <section id="viewTrail" role="tabpanel" aria-labelledby="tabTrail">
+        <p class="hint" id="trailHint">Send a message to see each step the agent takes.</p>
+        <ol class="trail" id="trail"></ol>
+      </section>
+
+      <section id="viewHealth" role="tabpanel" aria-labelledby="tabHealth" hidden>
+        <h2 class="panel-title">Live chats</h2>
+        <div id="healthLive" class="stats"></div>
+
+        <h2 class="panel-title">Evaluation</h2>
+        <p class="hint">Runs the test cases against the agent. This makes real model calls and can take a minute.</p>
+        <button type="button" class="btn" id="runEval">Run evaluation</button>
+        <div id="healthEval" class="eval" aria-live="polite"></div>
+      </section>
+    </aside>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <noscript><p class="noscript">This console needs JavaScript.</p></noscript>
+  <script src="app.js?v=2" defer></script>
+</body>
+</html>
