@@ -13,6 +13,21 @@ A tool-using AI agent built with [LangGraph](https://github.com/langchain-ai/lan
 - **REST API**: chat, SSE streaming, approvals, memory, monitoring, and evaluation endpoints
 - **Chat UI**: a no-build web console (chat, approval prompts, live step trail, memory editor, health) served by the API
 
+## Screenshots
+ 
+**Before chat**: suggested prompts, an empty memory panel, and an empty step trail.
+ 
+![Before chat](docs/screenshots/01-before-chat.png)
+ 
+**After chat**: the reply with its tool and memory chips, the memory the agent saved, and the step-by-step trail with timings.
+ 
+![After chat](docs/screenshots/02-after-chat.png)
+ 
+**Health**: live latency and status, plus the evaluation results.
+ 
+![Health](docs/screenshots/03-health.png)
+
+
 ## Workflow
 
 ```mermaid
@@ -70,6 +85,8 @@ agent_project/
 ├── evaluate.py               # CLI evaluation entry point
 ├── requirements.txt
 └── README.md
+└── docs/
+    └── screenshots/         # 3 pics 
 ```
 
 ## Getting Started
